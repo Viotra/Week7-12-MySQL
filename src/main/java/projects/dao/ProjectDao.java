@@ -233,7 +233,7 @@ public class ProjectDao extends DaoBase{
 		String sql = "UPDATE " + PROJECT_TABLE + " SET " + "project_name = ?, estimated_hours = ?, actual_hours = ?, "
 				+ "difficulty = ?, notes = ? WHERE project_id = ?";
 		// @formatter:on
-		
+		System.out.println(project);
 		try (Connection conn = DbConnection.getConnection()){
 			startTransaction(conn);
 			
@@ -260,7 +260,7 @@ public class ProjectDao extends DaoBase{
 	}
 
 	public boolean deleteProject(Integer projectId) {
-		String sql = "DELETE * FROM project WHERE project_id = ?";
+		String sql = "DELETE FROM project WHERE project_id = ?";
 		
 		try(Connection conn = DbConnection.getConnection()){
 			startTransaction(conn);

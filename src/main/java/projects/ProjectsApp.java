@@ -69,18 +69,15 @@ public class ProjectsApp {
 		listProjects();
 		Integer projectId = getIntInput("Please enter of the ID of the project to delete: ");
 		
-		try {
+		
 			projectService.deleteProject(projectId);
 			System.out.println("Project " + projectId + " has been successfully deleted.");
 			
-			if (projectId == curProject.getProjectId()) {
+			if (Objects.nonNull(curProject) && curProject.getProjectId().equals(projectId)) {
 				curProject = null;
 			}
-		}
-		catch(Exception e) {
-			throw new DbException();
-		}
 	}
+			
 
 	private void updateProjectDetails() {
 		if (Objects.isNull(curProject)) {
@@ -104,7 +101,7 @@ public class ProjectsApp {
 			
 			projectService.modifyProjectDetails(project);
 			
-			projectService.fetchProjectById(curProject.getProjectId());
+			curProject = projectService.fetchProjectById(curProject.getProjectId());
 		}
 		
 	}
