@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -137,6 +135,7 @@ public class ProjectDao extends DaoBase{
 					System.out.println(stmt.toString());
 					try(ResultSet rs = stmt.executeQuery()){
 						System.out.println(rs.toString());
+						System.out.println(Project.class.toString());
 						if (rs.next()) {
 							project = extract(rs, Project.class);
 						}
@@ -256,6 +255,30 @@ public class ProjectDao extends DaoBase{
 				throw new DbException(e);
 			}
 		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
+
+	public boolean deleteProject(Integer projectId) {
+		String sql = "DELETE * FROM project WHERE project_id = ?";
+		
+		try(Connection conn = DbConnection.getConnection()){
+			startTransaction(conn);
+			
+			try(PreparedStatement stmt = conn.prepareStatement(sql)){
+				setParameter(stmt, 1, projectId, Integer.class);
+				
+				boolean deleted = stmt.executeUpdate() == 1;
+				
+				commitTransaction(conn);
+				return deleted;
+			}
+			catch(Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+		}
+		catch (SQLException e) {
 			throw new DbException(e);
 		}
 	}
