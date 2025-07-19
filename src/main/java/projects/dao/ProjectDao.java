@@ -132,10 +132,10 @@ public class ProjectDao extends DaoBase{
 				
 				try(PreparedStatement stmt = conn.prepareStatement(sql)){
 					setParameter(stmt, 1, projectId, Integer.class);
-					System.out.println(stmt.toString());
+					//System.out.println(stmt.toString());
 					try(ResultSet rs = stmt.executeQuery()){
-						System.out.println(rs.toString());
-						System.out.println(Project.class.toString());
+//						System.out.println(rs.toString());
+//						System.out.println(Project.class.toString());
 						if (rs.next()) {
 							project = extract(rs, Project.class);
 						}

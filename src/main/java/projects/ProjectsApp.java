@@ -67,7 +67,7 @@ public class ProjectsApp {
 
 	private void deleteProject() {
 		listProjects();
-		Integer projectId = getIntInput("Please enter of the ID of the project to delete: ");
+		Integer projectId = getIntInput("Please enter of the ID of the project to delete");
 		
 		
 			projectService.deleteProject(projectId);
@@ -132,7 +132,7 @@ public class ProjectsApp {
 		String projectName = getStringInput("Enter the project name");
 		BigDecimal estimatedHours = getDecimalInput("Enter the estimated hours");
 		BigDecimal actualHours = getDecimalInput("Enter the actual hours");
-		Integer difficulty = getIntInput("Enter the project difficulty (1-5");
+		Integer difficulty = getIntInput("Enter the project difficulty (1-5)");
 		String notes = getStringInput("Enter the project notes");
 		
 		Project project = new Project();
